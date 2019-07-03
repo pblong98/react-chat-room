@@ -31,7 +31,17 @@ Meteor.methods({
     }
     check(text, String);
     check(id, String);
-    
+    Messages.update(id, { $set: { text : text } });
+  },
+  'Messages.delete'(id) {
+    if (!this.userId) 
+    {
+        throw new Meteor.Error('not-authorized');
+    }
+    check(id, String);
+    var thismess = Messages.findOne(id);
+    if(thismess.username == Meteor.user().username)
+    Messages.remove(id);
   }
 });
 

@@ -5,6 +5,12 @@ import { Messages } from '../../api/Messages';
 
 class ChatBox extends React.Component{
     
+    onMessageClick(_id)
+    {
+        console.log(_id);
+        Meteor.call("Messages.delete",_id);
+    }
+
     renderMessages()
     {
         var messages = this.props.messages;
@@ -16,7 +22,7 @@ class ChatBox extends React.Component{
             if(isMineMessages)
             {
                 return (
-                    <div className="d-flex justify-content-end" key={index}>
+                    <div onClick={()=>this.onMessageClick(item._id)} className="d-flex justify-content-end" key={index}>
                         <div className="pl-3 pr-3 pt-3 mb-2 bg-secondary text-white minemessage">
                         <span className="badge badge-light">Me</span>
                             {item.text}
@@ -29,7 +35,7 @@ class ChatBox extends React.Component{
             else
             {
                 return (                 
-                    <div className="d-flex" key={index}>
+                    <div onClick={()=>this.onMessageClick(item._id)} className="d-flex" key={index}>
                         <div className="pl-3 pr-3 pt-3 mb-2 bg-info text-white theirmessage">
                             <span className="badge badge-light">{item.username}</span>
                                 {item.text}
