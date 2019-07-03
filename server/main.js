@@ -1,1 +1,1 @@
-import {Messages} from '../imports/api/Messages'
+import {} from '../imports/api/Messages'

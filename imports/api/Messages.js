@@ -1,6 +1,7 @@
 import { Meteor } from 'meteor/meteor';
 import { Mongo } from 'meteor/mongo';
 import { check } from 'meteor/check';
+export const Messages = new Mongo.Collection('Messages');
 
 if (Meteor.isServer) {
   Meteor.publish('Messages', function tasksPublication() {
@@ -19,11 +20,18 @@ Meteor.methods({
         {
             text,
             createdAt: new Date(),
-            owner: this.userId,
             username: Meteor.user().username,
         }
     );
+  },
+  'Messages.update'(id,text) {
+    if (!this.userId) 
+    {
+        throw new Meteor.Error('not-authorized');
+    }
+    check(text, String);
+    check(id, String);
+    
   }
 });
 
-export const Messages = new Mongo.Collection('Messages');

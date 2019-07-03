@@ -9,17 +9,19 @@ class ChatBox extends React.Component{
     {
         var messages = this.props.messages;
         return messages.map((item, index) => {
-            var isMineMessages = item.owner === Meteor.userId();
-            
+            var isMineMessages = item.username === Meteor.user().username;
+            console.log();
+            var date = new Date(item.createdAt);
+            var createdAt = date.getDay() + "/" + date.getMonth() + "/" + date.getFullYear() + " " + date.getHours() + ":" +date.getMinutes();
             if(isMineMessages)
             {
                 return (
-                    <div className="d-flex justify-content-end">
+                    <div className="d-flex justify-content-end" key={index}>
                         <div className="pl-3 pr-3 pt-3 mb-2 bg-secondary text-white minemessage">
                         <span className="badge badge-light">Me</span>
                             {item.text}
                         <hr />
-                        <div className="pb-1 messagetext text-left">{item.createdAt}</div>
+                        <div className="pb-1 messagetext text-left">{createdAt}</div>
                         </div>
                     </div>
                 );
@@ -27,12 +29,12 @@ class ChatBox extends React.Component{
             else
             {
                 return (                 
-                    <div className="d-flex">
+                    <div className="d-flex" key={index}>
                         <div className="pl-3 pr-3 pt-3 mb-2 bg-info text-white theirmessage">
                             <span className="badge badge-light">{item.username}</span>
                                 {item.text}
                             <hr />
-                            <div className="pb-1 messagetext text-right">{item.createdAt}</div>
+                            <div className="pb-1 messagetext text-right">{createdAt}</div>
                         </div>
                     </div>
                 );
@@ -54,6 +56,6 @@ class ChatBox extends React.Component{
 export default withTracker(() => {
     Meteor.subscribe('Messages');
     return{
-        messages : Messages.find().fetch()
+        messages : Messages.find({},{sort : {createdAt : 1}}).fetch()
     }
 })(ChatBox);

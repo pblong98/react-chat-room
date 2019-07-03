@@ -7,7 +7,8 @@ class InputBar extends React.Component{
     {
         var text = this.refs.inputtxt.value;
         console.log(text);
-        Meteor.call('Messages.insert', text);
+        Meteor.call('Messages.push', text);
+        this.refs.inputtxt.value = "";
     }
     
     render()

@@ -21,14 +21,14 @@ class App extends React.Component{
   onLogged()
   {
     this.setState({logged : true});
-    console.log(Accounts.user());
+    //console.log(Accounts.user());
   }
 
   onLogout()
   {
     Accounts.logout();
     this.setState({logged : false});
-    console.log(Accounts.user());
+    //console.log(Accounts.user());
   }
 
   componentDidMount()
@@ -39,8 +39,8 @@ class App extends React.Component{
       Meteor.loginWithToken(token, (error, result) =>{
         if(!error)
         {
-          console.log(result);
-          console.log(Accounts.user());
+          //console.log(result);
+          //console.log(Accounts.user());
           Accounts.user();
           this.setState({logged : true});
         }
