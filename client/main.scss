@@ -1,0 +1,44 @@
+@import "../node_modules/bootstrap/scss/bootstrap.scss";
+.flowscroll{
+    height: 450px;
+    overflow: scroll;  
+}
+
+/* width */
+::-webkit-scrollbar {
+width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+background: #f1f1f1; 
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+background: #888; 
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+background: #555; 
+}
+
+.theirmessage{
+    max-width: 40%;
+    border-radius: 15px;
+}
+
+.minemessage{
+    max-width: 40%;
+    border-radius: 15px;
+}
+
+.messagetext{
+    font-size: 55%;
+    width: 100%;
+}
+
+hr{
+    margin: 2%;
+}
